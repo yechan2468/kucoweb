@@ -24,17 +24,22 @@ jobs:
       run: chmod +x ./accountant/gradlew
       
     - name: test with gradle
-      run: ./accountant/gradlew :app::testDebug
+    - uses: gradle/gradle-build-action@v2
+      with:
+        arguments: build
+        build-root-directory: ./accountant/
     
     - name: upload test result
       if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: test-report
-        path: accountant/build/test-report.html
+        path: ./accountant/build/test-report.html
   
   build:
     name: build and run kucoweb on remote server
+    needs: [test]
+    if: success() && needs.test.result == 'success'
     runs-on: ubuntu-22.04
     steps:
       - name: executing remote ssh commands using key
