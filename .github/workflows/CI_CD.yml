@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths-ignore:
       - 'README.md'
+      - '.github/*'
 
 jobs:
   test:
@@ -60,5 +61,5 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /share/kuco
+            cd /share/kuco/kucoweb
             sh deploy.sh
