@@ -24,7 +24,7 @@ jobs:
       run: chmod +x ./accountant/gradlew
       
     - name: test with gradle
-    - uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v2
       with:
         arguments: build
         build-root-directory: ./accountant/
